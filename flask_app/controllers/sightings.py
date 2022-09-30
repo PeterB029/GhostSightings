@@ -34,7 +34,7 @@ def edit_sighting_page(id):
         "id" : id
     }
     this_sighting = Sighting.get_one_sighting_by_user(data)
-    return render_template('sighting_edit.html', this_sighting)
+    return render_template('sighting_edit.html', this_sighting=this_sighting)
 
 @app.route('/sighting/update/<int:id>', methods=['POST'])
 def update_sighting(id):
@@ -61,7 +61,7 @@ def view_sighting(id):
         "id" : id
     }
     this_sighting = Sighting.get_one_sighting_by_user(data)
-    return render_template('sighting_view.html', this_sighting)
+    return render_template('sighting_view.html', this_sighting=this_sighting)
 
 @app.route('/sighting/delete/<int:id>')
 def delete_sighting(id):

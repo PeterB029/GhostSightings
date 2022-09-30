@@ -3,7 +3,7 @@ from flask import flash
 import re
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-db = 'ghost_sighting_schema'
+db = 'ghost_sightings_schema'
 
 class User:
     def __init__(self, data):
@@ -43,6 +43,11 @@ class User:
         email_matches = connectToMySQL(db).query_db(query, {"email": user['email']})
         if len(email_matches) > 0:
             flash("Email is already registered")
+            is_valid = False
+        query = "SELECT * FROM users WHERE username = %(username)s"
+        user_matches = connectToMySQL(db).query_db(query, {"username": user['username']})
+        if len(user_matches) > 0:
+            flash("Username is already being used. Plesae Try another name.")
             is_valid = False
         if len(user['first_name']) < 3:
             flash('First name must be at least 3 characters long.')

@@ -50,7 +50,7 @@ def login_user():
     session['user_id'] = this_user.id
     # session['first_name'] = this_user.first_name
     # session['last_name'] = this_user.last_name
-    session['username'] = request.form['username']
+    # session['username'] = request.form['username']
     return redirect('/sightings')
 
 @app.route('/sightings')
@@ -58,7 +58,8 @@ def success():
     if 'user_id' not in session:
         flash("You must be logged in to view this page")
         return redirect("/")
-    return render_template('sightings.html')
+    all_post = Sighting.get_all_sightings_by_users()
+    return render_template('sightings.html', all_post=all_post, userID=session['user_id'])
 
 @app.route('/user/<int:id>')
 def user_dashbaord(id):

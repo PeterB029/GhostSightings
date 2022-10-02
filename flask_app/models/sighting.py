@@ -1,7 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 
-db = 'ghost_sighting_schema'
+db = 'ghost_sightings_schema'
 
 class Sighting:
     def __init__(self, data):
@@ -35,9 +35,9 @@ class Sighting:
         return results
 
     @classmethod
-    def get_all_sightings_by_users(cls, data): #Main Page
+    def get_all_sightings_by_users(cls): #Main Page
         query = "SELECT * FROM sightings JOIN users ON users.id=sightings.user_id"
-        results = connectToMySQL(db).query_db(query, data)
+        results = connectToMySQL(db).query_db(query)
         return results
 
     @classmethod

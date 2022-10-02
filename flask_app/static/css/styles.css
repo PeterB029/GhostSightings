@@ -1,0 +1,42 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.button_bar{
+    padding: 40px;
+    text-align: center;
+}
+
+.add_button{
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    border-style: solid;
+    border-color: green; 
+    color: white;
+}
+
+.add_button:hover{
+    color: white;
+    background-color: green;
+    -moz-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    -webkit-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+}
+
+.container_posts{
+    /* background-color: aqua; */
+    margin: auto;
+    /* width: 1000px; */
+    padding: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+
+}
+
+.post{
+    margin-top: 20px;
+}

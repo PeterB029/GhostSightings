@@ -6,6 +6,7 @@ db = 'ghost_sightings_schema'
 class Sighting:
     def __init__(self, data):
         self.id = data['id']
+        self.title = data['title']
         self.location = data['location']
         self.date = data['date']
         self.time = data['time']
@@ -18,13 +19,13 @@ class Sighting:
 
     @classmethod
     def add_sighting(cls, data):
-        query = "INSERT into sightings (location, date, time, description, intensity, num_of_activities, reaction, user_id) VALUES (%(location)s, %(date)s, %(time)s, %(description)s, %(intensity)s, %(num_of_activities)s, %(reaction)s, %(user_id)s)"
+        query = "INSERT into sightings (title, location, date, time, description, intensity, num_of_activities, reaction, user_id) VALUES (%(title)s, %(location)s, %(date)s, %(time)s, %(description)s, %(intensity)s, %(num_of_activities)s, %(reaction)s, %(user_id)s)"
         results = connectToMySQL(db).query_db(query, data)
         return results
 
     @classmethod
     def update_sighting(cls, data):
-        query = "UPDATE sightings SET location=%(location)s, date=%(date)s, time=%(time)s, description=%(description)s, intensity=%(intensity)s, num_of_activities=%(num_of_activities)s, reaction=%(reaction)s id=%(id)s"
+        query = "UPDATE sightings SET title=%(title)s, location=%(location)s, date=%(date)s, time=%(time)s, description=%(description)s, intensity=%(intensity)s, num_of_activities=%(num_of_activities)s, reaction=%(reaction)s id=%(id)s"
         results = connectToMySQL(db).query_db(query, data)
         return results
 
@@ -55,6 +56,9 @@ class Sighting:
     @staticmethod
     def validate_sighting(sighting):
         is_valid = True
+        if len(sighting['title']) < 3:
+            flash("Title must be at least 3 characters long")
+            is_valid = False
         if len(sighting['location']) < 3:
             flash("Location must be at least 3 characters long")
             is_valid = False

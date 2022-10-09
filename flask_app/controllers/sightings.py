@@ -14,16 +14,18 @@ def create_sighting():
     if not Sighting.validate_sighting(request.form):
         return redirect('/sighting/add')
     data = {
+        "title" : request.form['title'],
         "location" : request.form['location'],
         "date" : request.form['date'],
         "time" : request.form['time'],
         "description" : request.form['description'],
         "intensity" : request.form['intensity'],
         "num_of_activities" : request.form['num_of_activities'],
-        "reaction" : request.form['reaction']
+        "reaction" : request.form['reaction'],
+        "user_id" : session['user_id']
     }
     Sighting.add_sighting(data)
-    return render_template('/sightings')
+    return redirect('/sightings')
 
 @app.route('/sighting/edit/<int:id>')
 def edit_sighting_page(id):
@@ -41,6 +43,7 @@ def update_sighting(id):
     if not Sighting.validate_sighting(request.form):
         return redirect(f'/sighting/edit/{id}')
     data = {
+        "title" : request.form['title'],
         "location" : request.form['location'],
         "date" : request.form['date'],
         "time" : request.form['time'],

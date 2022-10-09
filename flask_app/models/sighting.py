@@ -71,7 +71,7 @@ class Sighting:
         if len(sighting['description']) < 3:
             flash("Description must be at least 3 characters long")
             is_valid = False
-        if sighting['num_of_activities'] < 1:
+        if int(sighting['num_of_activities']) < 1:
             flash("Number of Activities must be at least 1")
             is_valid = False
         if len(sighting['reaction']) < 3:

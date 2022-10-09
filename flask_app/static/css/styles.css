@@ -37,6 +37,47 @@
 
 }
 
-.post{
+#post{
     margin: 20px;
+    height: 300px;
+}
+
+.detail_overflow{
+    max-height: 150px;
+    overflow: hidden;
+    /* text-overflow: ellipsis;
+    white-space: nowrap; */
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+
+.white_box{
+    background-color: white;
+    margin: auto;
+    padding: 40px;
+    width: 75%;
+    border-style: solid;
+    border-color: black;
+    border-radius: 30px;
+}
+
+.form_container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.left_col , .right_col{
+    margin: 20px;
+    width: 75%;
+}
+
+.text_boxes{
+    display: flex;
+    justify-content: space-between;
+}
+
+.text_box{
+    margin: -10px 20px 0px 20px;
+    width: 100%;
 }

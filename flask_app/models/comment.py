@@ -10,14 +10,14 @@ class Comment:
         self.updated_at = data['updated_at']
 
     @classmethod
-    def add_comment(cls):
-        query = "INSERT INTO comments (content) VALUES (%(content)s)"
-        results = connectToMySQL(db).query_db(query)
+    def add_comment(cls, data):
+        query = "INSERT INTO comments (content, sighting_id, user_id) VALUES (%(content)s, %(sighting_id)s, %(user_id)s)"
+        results = connectToMySQL(db).query_db(query, data)
         return results
 
     @classmethod
     def get_comment_by_sighting_and_user(cls, data):
-        query = "SELECT * FROM comments JOIN sightings ON sightings.id=comments.sighting_id JOIN users ON users.id=comments.user_id WHERE comments.id=%(id)s"
+        query = "SELECT * FROM comments JOIN sightings ON sightings.id=comments.sighting_id JOIN users ON users.id=comments.user_id WHERE comments.sighting_id=%(id)s ORDER BY comments.created_at ASC"
         results = connectToMySQL(db).query_db(query, data)
         return results
 

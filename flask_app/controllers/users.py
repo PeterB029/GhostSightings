@@ -96,6 +96,10 @@ def update_profile(id):
     User.update_user(data)
     return redirect(f'/user/{id}')
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 @app.route('/logout')
 def logout():
     session.clear()

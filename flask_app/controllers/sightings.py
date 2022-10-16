@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.sighting import Sighting
+from flask_app.models.comment import Comment
 
 @app.route('/sighting/add')
 def add_sighting_page():
@@ -64,7 +65,8 @@ def view_sighting(id):
         "id" : id
     }
     this_sighting = Sighting.get_one_sighting_by_user(data)
-    return render_template('sighting_view.html', this_sighting=this_sighting)
+    all_comments = Comment.get_comment_by_sighting_and_user(data)
+    return render_template('sighting_view.html', this_sighting=this_sighting, all_comments=all_comments)
 
 @app.route('/sighting/delete/<int:id>')
 def delete_sighting(id):

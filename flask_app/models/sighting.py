@@ -33,7 +33,7 @@ class Sighting:
     def get_one_sighting_by_user(cls, data): #View Sighting Page
         query = "SELECT * FROM sightings JOIN users ON users.id=sightings.user_id WHERE sightings.id=%(id)s"
         results = connectToMySQL(db).query_db(query, data)
-        return results
+        return results[0]
 
     @classmethod
     def get_all_sightings_by_users(cls): #Main Page

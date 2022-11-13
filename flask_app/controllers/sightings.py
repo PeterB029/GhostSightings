@@ -44,6 +44,7 @@ def update_sighting(id):
     if not Sighting.validate_sighting(request.form):
         return redirect(f'/sighting/edit/{id}')
     data = {
+        "id" : id,
         "title" : request.form['title'],
         "location" : request.form['location'],
         "date" : request.form['date'],
@@ -54,7 +55,7 @@ def update_sighting(id):
         "reaction" : request.form['reaction']
     }
     Sighting.update_sighting(data)
-    return render_template('/sightings')
+    return redirect(f'/sighting/{id}')
 
 @app.route('/sighting/<int:id>')
 def view_sighting(id):

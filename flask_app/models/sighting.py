@@ -25,7 +25,7 @@ class Sighting:
 
     @classmethod
     def update_sighting(cls, data):
-        query = "UPDATE sightings SET title=%(title)s, location=%(location)s, date=%(date)s, time=%(time)s, description=%(description)s, intensity=%(intensity)s, num_of_activities=%(num_of_activities)s, reaction=%(reaction)s id=%(id)s"
+        query = "UPDATE sightings SET title=%(title)s, location=%(location)s, date=%(date)s, time=%(time)s, description=%(description)s, intensity=%(intensity)s, num_of_activities=%(num_of_activities)s, reaction=%(reaction)s WHERE id=%(id)s"
         results = connectToMySQL(db).query_db(query, data)
         return results
 

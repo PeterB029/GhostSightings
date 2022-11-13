@@ -50,6 +50,11 @@
                 <p>{{this_sighting.reaction}}</p>
             </div>
             <p>___</p>
+            {% if session.user_id == this_sighting.user_id %}
+            <div class="button_bar">
+                <a href="/sighting/edit/{{this_sighting.id}}" class="add_button">Edit Post!</a>
+            </div>
+            {% endif %}
             <p>Posted by: {{this_sighting.username}}</p>
             <form action="/comment/create/{{this_sighting.id}}/{{session.user_id}}" method="post" class="sighting_text">
                 <textarea name="content" cols="75" rows="3" placeholder="Comment Here..." style="padding:3px;"></textarea>

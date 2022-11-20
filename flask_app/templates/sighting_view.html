@@ -20,7 +20,7 @@
                     <a class="nav-link" href="/sightings">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/{{userID}}">My Page</a>
+                    <a class="nav-link" href="/user/{{session.user_id}}">My Page</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/contact">Contact Us</a>
@@ -55,17 +55,29 @@
                 <a href="/sighting/edit/{{this_sighting.id}}" class="add_button">Edit Post!</a>
             </div>
             {% endif %}
-            <p>Posted by: {{this_sighting.username}}</p>
+            <p>Posted by: <a href="/user/{{this_sighting.user_id}}">{{this_sighting.username}}</a></p>
             <form action="/comment/create/{{this_sighting.id}}/{{session.user_id}}" method="post" class="sighting_text">
                 <textarea name="content" cols="75" rows="3" placeholder="Comment Here..." style="padding:3px;"></textarea>
-                <button class="comment_btn">Post</button>
+                <div class="comment_buttons">
+                    <button class="comment_btn">Post</button> 
+                </div>
             </form>
+            <div>
+                <div class="belief_row">
+                    <button class="believe_btn" onclick="react_post(0)">Believe</button>
+                    <span id="believer">0</span>
+                </div>
+                <div class="belief_row">
+                    <button class="skeptic_btn" onclick="react_post(1)">Skeptic</button>
+                    <span id="skeptic">0</span>
+                </div>
+            </div>
             <hr>
             <div class="comment_section">
                 {% if all_comments %}
                     {% for comment in all_comments %}
                         <div class="sighting_text">
-                            <h4>{{comment.username}}</h4>
+                            <h4><a href="/user/{{comment.user_id}}">{{comment.username}}</a></h4>
                             <p>{{comment.content}}</p>
                             <p>{{comment.created_at}}</p>
                             {% if session.user_id == comment.user_id %}
@@ -78,6 +90,7 @@
             </div>
         </div>
     </section>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>

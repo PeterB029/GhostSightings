@@ -34,7 +34,11 @@
     display: flex;
     justify-content: space-evenly;
     flex-flow: row wrap;
+}
 
+#card_link{
+    text-decoration: none;
+    color:black;
 }
 
 #post{
@@ -105,24 +109,89 @@
     text-align: left;
 }
 
+.comment_buttons{
+    display: flex;
+}
+
 .comment_btn{
     display: block;
     padding: 3px 5px 3px 5px;
-    background-color: green;
+    background-color: rebeccapurple;
+    color: black;
     font-weight: bold;
 }
 
 .comment_btn:hover{
     color: white;
-    background-color: green;
     -moz-transition: all 0.5s ease-in;
     -o-transition: all 0.5s ease-in;
     -webkit-transition: all 0.5s ease-in;
     transition: all 0.5s ease-in;
 }
 
+.believe_btn {
+    display: block;
+    padding: 3px 5px 3px 5px;
+    color:black;
+    background-color: green;
+    font-weight: bold;
+    width: 100px;
+}
+
+.believe_btn:hover{
+    color: white;
+    -moz-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    -webkit-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+}
+
+.skeptic_btn{
+    display: block;
+    padding: 3px 5px 3px 5px;
+    color:black;
+    background-color: red;
+    font-weight: bold;
+    width: 100px;
+}
+
+.skeptic_btn:hover{
+    color: white;
+    -moz-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    -webkit-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+}
+
+.belief_row{
+    display: flex;
+    justify-content: baseline;
+}
+
+#believer, #skeptic{
+    margin-left: 20px;
+    font-size: 20pt;
+}
+
+#believer{
+    color: green;
+}
+
+#skeptic{
+    color: red;
+}
+
 .comment_section{
     overflow-y:auto;
-    max-height: 35vh;
+    max-height: 25vh;
+}
+
+.user_table{
+    margin: 0px auto;
+    width: 70%;
+    position: absolute;
+    left: 15%;
+    top: 30%;
+    color:white;
 }
 

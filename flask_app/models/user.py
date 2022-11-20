@@ -34,7 +34,7 @@ class User:
     def get_user(cls, data):
         query = "SELECT * FROM users WHERE id=%(id)s"
         results = connectToMySQL(db).query_db(query, data)
-        return results
+        return results[0]
 
     @classmethod
     def update_user(cls, data):

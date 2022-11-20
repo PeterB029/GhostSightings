@@ -69,10 +69,10 @@ def view_sighting(id):
     all_comments = Comment.get_comment_by_sighting_and_user(data)
     return render_template('sighting_view.html', this_sighting=this_sighting, all_comments=all_comments)
 
-@app.route('/sighting/delete/<int:id>')
-def delete_sighting(id):
+@app.route('/sighting/delete/<int:id>/<int:user_id>')
+def delete_sighting(id, user_id):
     data = {
         "id" : id
     }
     Sighting.delete_sighting(data)
-    return redirect('/sightings')
+    return redirect(f'/user/{user_id}')

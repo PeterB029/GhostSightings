@@ -2,6 +2,8 @@ from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.sighting import Sighting
 from flask_app.models.comment import Comment
+from flask_app.models.believer import Believer
+from flask_app.models.non_believer import Non_believer
 
 @app.route('/sighting/add')
 def add_sighting_page():
@@ -65,9 +67,25 @@ def view_sighting(id):
     data = {
         "id" : id
     }
+    data2 = {
+        "sighting_id": id
+    }
     this_sighting = Sighting.get_one_sighting_by_user(data)
     all_comments = Comment.get_comment_by_sighting_and_user(data)
-    return render_template('sighting_view.html', this_sighting=this_sighting, all_comments=all_comments)
+    num_of_believers = Believer.get_num_believers(data2)
+    num_of_non_believers = Non_believer.get_num_non_believers(data2)
+    all_believers = Believer.get_all_believer()
+    print(all_believers)
+    all_non_believers = Non_believer.get_all_non_believer()
+    return render_template(
+        'sighting_view.html', 
+        this_sighting=this_sighting, 
+        all_comments=all_comments,  
+        num_of_believers= num_of_believers, 
+        num_of_non_believers=num_of_non_believers,
+        all_believers = all_believers,
+        all_non_believers = all_non_believers
+        )
 
 @app.route('/sighting/delete/<int:id>/<int:user_id>')
 def delete_sighting(id, user_id):

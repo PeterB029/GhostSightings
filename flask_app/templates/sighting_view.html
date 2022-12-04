@@ -64,12 +64,46 @@
             </form>
             <div>
                 <div class="belief_row">
-                    <button class="believe_btn" onclick="react_post(0)">Believe</button>
-                    <span id="believer">0</span>
+                    <!-- <button class="believe_btn" onclick="react_post(0)">Believe</button>
+                    <span id="believer">0</span> -->
+                    {% set ns = namespace(believer_exist=false) %}
+                    {% for item in all_believers %}
+                        {% if item.user_id==session.user_id and item.sighting_id==this_sighting.id %}
+                            {% set ns.believer_exist = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if ns.believer_exist %}
+                        <a href="/delete/believer/{{session.user_id}}/{{this_sighting.id}}">Believed</a>
+                        {{num_of_believers}}
+                    {% else %}
+                        <form action="/create/believer" method="post">
+                            <input type="hidden" name="user_id" value="{{session.user_id}}">
+                            <input type="hidden" name="sighting_id" value="{{this_sighting.id}}">
+                            <button class="believe_btn">Believe</button>
+                            {{num_of_believers}}
+                        </form>
+                    {% endif %}
                 </div>
                 <div class="belief_row">
-                    <button class="skeptic_btn" onclick="react_post(1)">Skeptic</button>
-                    <span id="skeptic">0</span>
+                    <!-- <button class="skeptic_btn" onclick="react_post(1)">Skeptic</button>
+                    <span id="skeptic">0</span> -->
+                    {% set ns = namespace(non_believer_exist=false) %}
+                    {% for item in all_non_believers %}
+                        {% if item.user_id==session.user_id and item.sighting_id==this_sighting.id %}
+                            {% set ns.non_believer_exist = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if ns.non_believer_exist %}
+                        <a href="/delete/non_believer/{{session.user_id}}/{{this_sighting.id}}">Skepticed</a>
+                        {{num_of_non_believers}}
+                    {% else %}
+                        <form action="/create/non_believer" method="post">
+                            <input type="hidden" name="user_id" value="{{session.user_id}}">
+                            <input type="hidden" name="sighting_id" value="{{this_sighting.id}}">
+                            <button class="skeptic_btn">Skeptic</button>
+                            {{num_of_non_believers}}
+                        </form>
+                    {% endif %}
                 </div>
             </div>
             <hr>
